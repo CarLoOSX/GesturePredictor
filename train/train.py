@@ -27,7 +27,7 @@ conv2_filters = 64
 filter1_size = (3, 3)
 filter2_size = (2, 2)
 pool_size = (2, 2)
-classes = 2
+classes = 5
 lr = 0.0004
 
 # Prepare the images
