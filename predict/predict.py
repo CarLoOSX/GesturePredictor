@@ -6,13 +6,13 @@ from tensorflow.keras.models import load_model
 # Prepare the model
 root_dir = os.path.abspath("")
 
-model = root_dir + '/model/model.h5'
-model_weights = root_dir + '/model/weights.h5'
+model = '../model/model.h5'
+model_weights = '../model/weights.h5'
 cnn = load_model(model)
 cnn.load_weights(model_weights)
 
 # Keras Properties
-width, height = 150, 150
+width, height = 250, 250
 
 
 def predict(file):
@@ -42,5 +42,15 @@ def predict(file):
     return answer
 
 
-predict(root_dir + "path_to_folder/prueba.png")
+predict(root_dir + "/plots/BOTTOM_1622219767249.png")
+
+predict(root_dir + "/plots/CIRCLE_1622219770135.png")
+
+
+predict(root_dir + "/plots/LEFT_1622219763020.png")
+
+
+predict(root_dir + "/plots/RIGHT_1622219764048.png")
+
+predict(root_dir + "/plots/TOP_1622219766228.png")
 

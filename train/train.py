@@ -12,15 +12,15 @@ keras.clear_session()
 
 # Get Directories
 root_dir = os.path.abspath("")
-training_data = os.path.join(root_dir, "train/data/training")
-validation_data = os.path.join(root_dir, "train/data/validation")
+training_data = os.path.join(root_dir, "data/training")
+validation_data = os.path.join(root_dir, "data/validation")
 
 
 # Keras Parameters
-epochs = 20
-width, height = 150, 150
-batch_size = 22
-train_steps = 22
+epochs = 50
+width, height = 250, 250
+batch_size = 15
+train_steps = 15
 validation_steps = 22
 conv1_filters = 32
 conv2_filters = 64
