@@ -16,21 +16,31 @@ width, height = 150, 150
 
 
 def predict(file):
+
     x = load_img(file, target_size=(width, height))
     x = img_to_array(x)
     x = np.expand_dims(x, axis=0)
+
     array = cnn.predict(x)
     result = array[0]
+
     print(result)
 
     answer = np.argmax(result)
+
     if answer == 0:
-        print("======= | Green | =======")
+        print("======= | Bottom | =======")
     elif answer == 1:
-        print("======= | Red | =======")
+        print("======= | Circle | =======")
+    elif answer == 2:
+        print("======= | Left | =======")
+    elif answer == 3:
+        print("======= | Right | =======")
+    elif answer == 4:
+        print("======= | Top | =======")
 
     return answer
 
 
-predict(root_dir + "/prepare/to_test/plots/prueba.png")
+predict(root_dir + "path_to_folder/prueba.png")
 
