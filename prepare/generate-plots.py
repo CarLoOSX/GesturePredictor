@@ -19,4 +19,5 @@ for filename in os.listdir(dir_data):
         plot = data.plot("time", legend=None)
         plot.axis('off')
         fig = plot.get_figure()
+        fig.set_size_inches(3, 3)
         fig.savefig(dir_plots + "/" + os.path.splitext(filename)[0] + ".png")

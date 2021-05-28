@@ -12,7 +12,7 @@ cnn = load_model(model)
 cnn.load_weights(model_weights)
 
 # Keras Properties
-width, height = 250, 250
+width, height = 150, 150
 
 
 def predict(file):
@@ -42,15 +42,13 @@ def predict(file):
     return answer
 
 
-predict(root_dir + "/plots/BOTTOM_1622219767249.png")
+predict(root_dir + "/plots/BOTTOM_1622223207449.png")
 
-predict(root_dir + "/plots/CIRCLE_1622219770135.png")
+predict(root_dir + "/plots/CIRCLE_1622223210062.png")
 
+predict(root_dir + "/plots/LEFT_1622223199334.png")
 
-predict(root_dir + "/plots/LEFT_1622219763020.png")
+predict(root_dir + "/plots/RIGHT_1622223202190.png")
 
-
-predict(root_dir + "/plots/RIGHT_1622219764048.png")
-
-predict(root_dir + "/plots/TOP_1622219766228.png")
+predict(root_dir + "/plots/TOP_1622223205189.png")
 
