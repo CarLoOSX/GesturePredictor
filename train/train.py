@@ -17,11 +17,11 @@ validation_data = os.path.join(root_dir, "data/validation")
 
 
 # Keras Parameters
-epochs = 40
-width, height = 150, 150
+epochs = 35
+width, height = 175, 175
 batch_size = 14
 train_steps = 14
-validation_steps = 22
+validation_steps = 13
 conv1_filters = 32
 conv2_filters = 64
 filter1_size = (3, 3)
