@@ -4,15 +4,15 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.models import load_model
 
 # Prepare the model
-root_dir = os.path.abspath("")
-
+root_dir = os.path.abspath("") + "/plots/"
+print(root_dir)
 model = '../model/model.h5'
 model_weights = '../model/weights.h5'
 cnn = load_model(model)
 cnn.load_weights(model_weights)
 
 # Keras Properties
-width, height = 175, 175
+width, height = 150, 150
 
 
 def predict(file):
@@ -23,42 +23,24 @@ def predict(file):
     array = cnn.predict(x)
     result = array[0]
 
-    print(result.dtype)
-
-    print(result)
-
     answer = np.argmax(result)
 
-    print(np.max(result))
-    if np.max(result) > 0.9:
+    if np.max(result) > 0.8:
         if answer == 0:
-            print("======= | Bottom | =======")
+            print(file + "=> Bottom")
         elif answer == 1:
-            print("======= | Circle | =======")
+            print(file + "=> Circle")
         elif answer == 2:
-            print("======= | Left | =======")
+            print(file + "=> Left")
         elif answer == 3:
-            print("======= | Right | =======")
+            print(file + "=> Right")
         elif answer == 4:
-            print("======= | Top | =======")
+            print(file + "=> Top")
     else:
         print("ERROR")
     return answer
 
 
-predict(root_dir + "/plots/LEFT_1622481685463.png")
-
-predict(root_dir + "/plots/LEFT_1622481706561.png")
-
-predict(root_dir + "/plots/right.png")
-
-predict(root_dir + "/plots/TOP_1622481712506.png")
-
-# predict(root_dir + "/plots/TOP_1622223205189.png")
-
-# predict("/Users/carloosx/Desktop/a.png")
-# predict("/Users/carloosx/Desktop/b.png")
-# predict("/Users/carloosx/Desktop/c.png")
-
-
-predict("/Users/carloosx/Desktop/Unknown.jpeg")
+for filename in os.listdir(root_dir):
+    if filename.endswith('.png'):
+        predict(os.path.join(root_dir, filename))
