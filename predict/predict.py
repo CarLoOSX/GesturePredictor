@@ -6,10 +6,10 @@ from tensorflow.keras.models import load_model
 # Prepare the model
 root_dir = os.path.abspath("") + "/plots/"
 print(root_dir)
-model = '../model/model.h5'
+model_h5 = '../model/model.h5'
 model_weights = '../model/weights.h5'
-cnn = load_model(model)
-cnn.load_weights(model_weights)
+model = load_model(model_h5)
+model.load_weights(model_weights)
 
 # Keras Properties
 width, height = 150, 150
@@ -20,7 +20,7 @@ def predict(file):
     x = img_to_array(x)
     x = np.expand_dims(x, axis=0)
 
-    array = cnn.predict(x)
+    array = model.predict(x)
     result = array[0]
 
     answer = np.argmax(result)
