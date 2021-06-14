@@ -73,10 +73,16 @@ validation_steps = validation_generator.n / validation_generator.batch_size
 
 model = Sequential()
 
-model.add(Convolution2D(64, (5, 5), padding="same", input_shape=(width, height, 3), activation='relu'))
+model.add(Convolution2D(64, (3, 3), padding="same", input_shape=(width, height, 3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Convolution2D(64, (5, 5), padding="same", activation='relu'))
+model.add(Convolution2D(64, (3, 3), padding="same", activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Convolution2D(128, (2, 2), padding="same", activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Convolution2D(128, (2, 2), padding="same", activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Convolution2D(256, (3, 3), padding="same", activation='relu'))
@@ -96,7 +102,7 @@ model.compile(loss='categorical_crossentropy',
               optimizer=optimizers.Adam(learning_rate, decay=1e-6),
               metrics=['accuracy'])
 
-early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=25)
+early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
 
 model.fit(
     training_generator,
