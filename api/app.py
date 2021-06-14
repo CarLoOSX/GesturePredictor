@@ -6,11 +6,12 @@ from flask import request
 from flask import jsonify
 import os
 import numpy as np
+import uuid
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.models import load_model
 
 root_dir = os.path.abspath("")
-dir_plots = os.path.join(root_dir + "/api/", "plots")
+dir_temp = os.path.join(root_dir + "/api/", "temp")
 dir_model = os.path.join(root_dir + "/api/", "model")
 
 model_h5 = os.path.join(dir_model, "model.h5")
@@ -30,14 +31,18 @@ name_space = app.namespace('gesture-predictor', description='Gesture Predictor A
 
 @name_space.route("/")
 class MainClass(Resource):
-    def post(self):
+    @staticmethod
+    def post():
         json_request = request.get_json(force=True)
         data = pd.DataFrame(eval(json.dumps(json_request)))
         plot = data.plot("timestamp")
         fig = plot.get_figure()
-        file = dir_plots + "/" + "test" + ".png"
+        if not os.path.exists(dir_temp):
+            os.mkdir(dir_temp)
+        file = dir_temp + "/" + str(uuid.uuid4()) + ".png"
         fig.savefig(file)
         result = predict(file)
+        os.remove(file)
         return jsonify({"result": result})
 
 
