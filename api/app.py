@@ -12,7 +12,7 @@ from tensorflow.keras.models import load_model
 
 root_dir = os.path.abspath("")
 dir_temp = os.path.join(root_dir + "/api/", "temp")
-dir_model = os.path.join(root_dir + "/api/", "model")
+dir_model = os.path.join(root_dir + "/api/", "../model")
 
 model_h5 = os.path.join(dir_model, "model.h5")
 model_weights = os.path.join(dir_model, "weights.h5")
