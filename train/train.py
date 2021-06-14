@@ -1,6 +1,5 @@
 import os
 import tensorflow as tf
-import tensorflow.keras.layers
 from tensorflow.keras import backend as keras
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Sequential
@@ -21,8 +20,9 @@ keras.clear_session()
 root_dir = os.path.abspath("")
 training_data = os.path.join(root_dir, "data/training")
 validation_data = os.path.join(root_dir, "data/validation")
+model_folder = os.path.join(root_dir, "../model")
 
-# Algorithm Hiperparameters
+# Algorithm HyperParameters
 epochs = 100  # number of time the training data passes throwugh the neuronal network
 batch_size = 21  # numero de lotes de datos por iteracion o epoch
 learning_rate = 0.0004  # escalar para multiplicar por el vector de gradiente
@@ -30,7 +30,7 @@ learning_rate_decay = 0  # una tasa que se utiliza para disminuir el learning_ra
 momentum = 0.9  # Con adam no se puede usar NAdam Ejemplo de la bola de billar sobre una pendiente, no hacer saltos
 # no pensar que se ha encontrado el minimo global
 
-# Neuronal Network Structure HiperParameter
+# Neuronal Network Structure HyperParameter
 width, height = 150, 150
 
 pool_size = (2, 2)
@@ -107,13 +107,10 @@ model.fit(
     callbacks=[early_stop])
 
 # Generate the model
-
-target_dir = root_dir + '/model/'
-
-if not os.path.exists(target_dir):
-    os.mkdir(target_dir)
-model.save('./model/model.h5')
-model.save_weights('./model/weights.h5')
+if not os.path.exists(model_folder):
+    os.mkdir(model_folder)
+model.save(model_folder + '/model.h5')
+model.save_weights(model_folder + '/weights.h5')
 
 # print(model.evaluate_generator(validation_generator.n, validation_generator.batch_size))
 
