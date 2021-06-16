@@ -1,18 +1,22 @@
-FROM continuumio/miniconda3
+FROM python:3.8-slim-buster
 
 WORKDIR /app
 
-# Create the environment:
-COPY conda-environment.yml .
-RUN conda env create -f environment.yml
+COPY environment.yml .
 
-# Make RUN commands use the new environment:
-SHELL ["conda", "run", "-n", "conda-env", "/bin/bash", "-c"]
+COPY model ./model
 
-# Demonstrate the environment is activated:
-RUN echo "Make sure flask is installed:"
-RUN python -c "import flask"
+COPY /api/app.py .
 
-# The code to run when container is started:
-COPY run.py .
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "conda-env", "python", "app.py"]
+EXPOSE 5000
+
+RUN pip install numpy \
+                pandas \
+                matplotlib \
+                flask \
+                tensorflow==2.5 \
+                flask_restplus \
+                Werkzeug==0.16.1
+
+ENTRYPOINT ["flask","run","--host=0.0.0.0"]
+

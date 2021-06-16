@@ -11,15 +11,10 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from tensorflow.keras.models import load_model
 
 root_dir = os.path.abspath('')
-
-dir_temp = os.path.join(root_dir+'/api/', 'temp')
-dir_model = os.path.join(root_dir, 'model')
-
-print(dir_temp)
-print(dir_model)
-
-model_h5 = os.path.join(dir_model, 'model.h5')
-model_weights = os.path.join(dir_model, 'weights.h5')
+dir_temp = os.path.join(root_dir, 'temp')
+model_dir = os.path.join(root_dir, 'model')
+model_h5 = os.path.join(model_dir, 'model.h5')
+model_weights = os.path.join(model_dir, 'weights.h5')
 
 model = load_model(model_h5)
 model.load_weights(model_weights)

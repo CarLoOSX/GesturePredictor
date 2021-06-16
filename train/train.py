@@ -102,7 +102,7 @@ model.compile(loss='categorical_crossentropy',
               optimizer=optimizers.Adam(learning_rate, decay=1e-6),
               metrics=['accuracy'])
 
-early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
+early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=15)
 
 model.fit(
     training_generator,
